@@ -44,6 +44,8 @@
  console.log(person.Hobbies[1])
 
  //
+
+ <ul id="todo"></ul>
  const todos = [
      {
          id: 1,
@@ -62,7 +64,13 @@
     }
  ];
 
- console.log(todos);
+ //console.log(todos);
+ var output = '';
+ for (var i = 0, i < todos.length; i++) {
+     output += '<li>'+todos[i].text+'</li>';
+ }
+ output = document.getElementById('todos').innerHTML;
+
 
  //functions
  function greet() {}
@@ -89,4 +97,75 @@
 
  // === is const equal , // = or , && = and
 
+ ///////////////////////////////////////////////////////////////
+
+ //PROMISES
+ let p = new Promise(function(resolve, reject) {
+//let p = new Promise((resolve, reject) => {
+     let a = 1 + 1
+     if (a == 2) {
+        resolve('success')
+     } else {
+        reject('Failed')
+     }
+ })
+
+ p.then(function(message) {
+//p.then((message) => {
+     console.log(`This is in the then ${message}`)
+ }) .catch(function(message) {
+//.catch((message) => {
+     console.log(`This is in the catch ${message}`)
+ })
+
  
+ //compare CALLBACKS &&& PROMISES
+ const userLeft = false
+ const userWatchingAnother = false
+//callback
+ function watchTutorialCallback (callback, errorCallback) {
+     if (userLeft) {
+        errorCallback ({
+            name: 'User Left',
+            message: ': :('
+        })
+     } else if (userWatchingAnother) {
+        errorCallback ({
+            name: 'User Watching Another Video',
+            message: ':My Tutorial < Another Video'
+        })
+     } else {
+        callback('Thumbs up, Please subscribe')
+     }
+ }
+
+ watchTutorialCallback((message) => {
+     console.log('Success: ' + message)
+ }, (error) => {
+     console.log(error.name + ' ' + error.message)
+ })
+
+ //promises
+ function watchTutorialPromises() {
+     return new Promise((resolve, reject) => {
+        if (userLeft) {
+            reject ({
+                name: 'User Left',
+                message: ': :('
+            })
+        } else if (userWatchingAnother) {
+            reject ({
+                name: 'User Watching Another Video',
+                message: ': My Tutorial < Another Video'
+            })
+        } else {
+            resolve('Thumbs up! Please subscribe')
+        }
+    })
+}
+
+watchTutorialPromises().then((message) => {
+    console.log(`Success: ${message}`)
+}).catch((error) => {
+    console.log(`${error.name} ${error.message}`)
+})
