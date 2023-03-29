@@ -203,3 +203,22 @@ const a1 = new Animal('Birds');
 const a2 = new Dog('Bingo');
 
 //
+//Tenary Operators
+let points = 110;
+let type = points > 100 ? "gold" : "silver";
+
+console.log(type);
+
+
+//
+//Write a function that takes two numbers 
+//and returns the maximum of the two
+
+function max(num1, num2) {
+    if (num1 > num2)
+        return `${num1} is the maximum number`;
+    else
+        return `${num2} is the maximum number`;
+    }
+
+console.log(max(3,6))
